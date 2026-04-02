@@ -6,7 +6,7 @@ const pinoLogger = require('./logger');
 
 const connectToDatabase = require('./models/db');
 const {loadData} = require("./util/import-mongo/index");
-
+const searchRoutes = require('./routes/searchRoutes');
 
 const app = express();
 app.use("*",cors());
@@ -33,7 +33,7 @@ const pinoHttp = require('pino-http');
 const logger = require('./logger');
 
 app.use(pinoHttp({ logger }));
-
+app.use('/api/search', searchRoutes);
 // Use Routes
 // Gift API Task 2: add the giftRoutes to the server by using the app.use() method.
 app.use('/api/gifts', giftRoutes);
