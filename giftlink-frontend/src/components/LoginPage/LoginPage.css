@@ -1,0 +1,67 @@
+/* LoginPage.css */
+
+/* Style the card container */
+.login-card {
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    border-radius: 0.5rem;
+}
+
+/* Style form labels */
+.login-card .form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Style input fields */
+.login-card input {
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Style general buttons */
+.login-card .btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+}
+
+/* Primary button style */
+.login-card .btn-primary {
+    background-color: #0056b3;
+    border: none;
+}
+
+/* Secondary button style */
+.login-card .btn-secondary {
+    background-color: #dc3545;
+    border: none;
+}
+
+/* Primary text color for links */
+.login-card .text-primary {
+    color: #0056b3;
+}
+
+/* Secondary text color for links */
+.login-card .text-secondary {
+    color: #6c757d;
+}
+
+/* Hover effects for links */
+a.text-primary:hover {
+    text-decoration: underline;
+}
+
+a.text-secondary:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .login-card {
+        padding: 1.5rem;
+    }
+}
