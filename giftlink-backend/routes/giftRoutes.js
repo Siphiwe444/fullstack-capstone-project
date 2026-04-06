@@ -1,20 +1,22 @@
-/*jshint esversion: 8 */
+/* jshint esversion: 8 */
 const express = require('express');
 const router = express.Router();
 const connectToDatabase = require('../models/db');
+const { ObjectId } = require('mongodb'); // for _id lookups if needed
 
+// GET all gifts
 router.get('/', async (req, res) => {
     try {
-        // Task 1: Connect to MongoDB and store connection to db constant
+        // Task 1: Connect to MongoDB
         const db = await connectToDatabase();
 
-        // Task 2: use the collection() method to retrieve the gift collection
+        // Task 2: Retrieve the "gifts" collection
         const collection = db.collection("gifts");
 
-        // Task 3: Fetch all gifts using the collection.find method. Chain with toArray method to convert to JSON array
+        // Task 3: Fetch all gifts
         const gifts = await collection.find({}).toArray();
 
-        // Task 4: return the gifts using the res.json method
+        // Task 4: Return gifts as JSON
         res.json(gifts);
     } catch (e) {
         console.error('Error fetching gifts:', e);
@@ -22,18 +24,21 @@ router.get('/', async (req, res) => {
     }
 });
 
+// GET a gift by ID
 router.get('/:id', async (req, res) => {
     try {
-        // Task 1: Connect to MongoDB and store connection to db constant
+        // Task 1: Connect to MongoDB
         const db = await connectToDatabase();
 
-        // Task 2: use the collection() method to retrieve the gift collection
+        // Task 2: Access the "gifts" collection
         const collection = db.collection("gifts");
 
         const id = req.params.id;
 
-        // Task 3: Find a specific gift by ID using the collection.fineOne method and store in constant called gift
+        // Task 3: Find gift by its ID
+        // Using "id" field (string ID) – adjust to "_id" if you use ObjectId
         const gift = await collection.findOne({ id: id });
+
         if (!gift) {
             return res.status(404).send('Gift not found');
         }
@@ -45,16 +50,19 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-
-
-// Add a new gift
+// POST a new gift
 router.post('/', async (req, res, next) => {
     try {
         const db = await connectToDatabase();
         const collection = db.collection("gifts");
-        const gift = await collection.insertOne(req.body);
 
-        res.status(201).json(gift.ops[0]);
+        // Insert the gift document
+        const result = await collection.insertOne(req.body);
+
+        // Fetch the inserted document
+        const insertedGift = await collection.findOne({ _id: result.insertedId });
+
+        res.status(201).json(insertedGift);
     } catch (e) {
         next(e);
     }
