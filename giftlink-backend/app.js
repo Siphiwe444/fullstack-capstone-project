@@ -1,4 +1,4 @@
-
+/*jshint esversion: 8 */
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -41,7 +41,7 @@ app.use((err, req, res, next) => {
     res.status(500).send('Internal Server Error');
 });
 
-/*jshint esversion: 8 */
+
 app.get("/",(req,res)=>{s
     res.send("Inside the server");
 });
