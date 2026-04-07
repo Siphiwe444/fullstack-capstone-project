@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
         const db = await connectToDatabase();
 
         // Task 2: Retrieve the "gifts" collection
-        const collection = db.collection("gifts");
+         const collection = db.collection("gifts");
 
         // Task 3: Fetch all gifts
         const gifts = await collection.find({}).toArray();
@@ -55,7 +55,6 @@ router.post('/', async (req, res, next) => {
     try {
         const db = await connectToDatabase();
         const collection = db.collection("gifts");
-
         // Insert the gift document
         const result = await collection.insertOne(req.body);
 
