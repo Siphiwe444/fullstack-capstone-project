@@ -9,15 +9,14 @@ export default function Navbar() {
   useEffect(() => {
     const authToken = sessionStorage.getItem('auth-token');
     const nameFromSession = sessionStorage.getItem('name');
-
+  
     if (authToken && nameFromSession) {
       setUserName(nameFromSession);
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setIsLoggedIn, setUserName]);
 
   const handleLogout = () => {
     sessionStorage.clear();
