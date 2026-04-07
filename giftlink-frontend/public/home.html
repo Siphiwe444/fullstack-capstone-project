@@ -4,25 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GiftLink Home</title>
+
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/home.css">
+
+    <!-- Custom Style -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f8f9fa;
+        }
+
+        .hero-section {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            padding: 10px 25px;
+            font-size: 18px;
+            border-radius: 25px;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="container my-5">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container">
+            
+            <!-- Brand -->
+            <a class="navbar-brand font-weight-bold" href="/app">GiftLink</a>
+
+            <!-- Toggle (mobile) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/app">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/app">Gifts</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+  
+    <div class="container hero-section">
         <div class="text-center">
-            <!-- Task 1: Add the main heading -->
+
+            <!-- Main Heading -->
             <h1 class="display-4 mb-3">GiftLink</h1>
-            
-            <!-- Task 2: Add the subheading -->
+
+            <!-- Subheading -->
             <h2 class="mb-4">Share Gifts and Joy!</h2>
-            
-            <!-- Task 3: Add the inspirational quote -->
-            <p class="lead">"Sharing is the essence of community. It is through giving that we enrich and perpetuate both our lives and the lives of others."</p>
-            
-            <!-- Task 4: Add the 'Get Started' button -->
-            <a href="/app" class="btn btn-primary">Get Started</a>
+
+            <!-- Quote -->
+            <p class="lead mb-4">
+                "Sharing is the essence of community. It is through giving that we enrich and perpetuate both our lives and the lives of others."
+            </p>
+
+            <!-- Button -->
+            <a href="/app" class="btn btn-primary">
+                Get Started
+            </a>
+
         </div>
     </div>
+
+    <!-- Bootstrap JS (important for navbar toggle) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

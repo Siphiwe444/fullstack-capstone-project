@@ -1,68 +1,113 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../context/AuthContext';
-import { urlConfig } from '../../config';
 
 export default function Navbar() {
   const { isLoggedIn, setIsLoggedIn, userName, setUserName } = useAppContext();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const authTokenFromSession = sessionStorage.getItem('auth-token');
+    const authToken = sessionStorage.getItem('auth-token');
     const nameFromSession = sessionStorage.getItem('name');
-    if (authTokenFromSession && nameFromSession) {
+
+    if (authToken && nameFromSession) {
       setUserName(nameFromSession);
+      setIsLoggedIn(true);
     } else {
-      sessionStorage.clear();
       setIsLoggedIn(false);
     }
-  }, [setIsLoggedIn, setUserName]);
+  }, []); 
 
   const handleLogout = () => {
     sessionStorage.clear();
     setIsLoggedIn(false);
-    navigate(`/app`);
+    navigate('/app');
   };
 
-  const profileSection = () => {
-    navigate(`/app/profile`);
+  const goToProfile = () => {
+    navigate('/app/profile');
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light" id='navbar_container'>
-      <Link className="navbar-brand" to="/app">GiftLink</Link>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+      <div className="container">
 
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-        <span className="navbar-toggler-icon"></span>
-      </button>
+      
+        <Link className="navbar-brand fw-bold" to="/app">
+          GiftLink
+        </Link>
 
-      <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul className="navbar-nav">
-          <li className="nav-item"><Link className="nav-link" to="/app">Gifts</Link></li>
-          <li className="nav-item"><Link className="nav-link" to="/app/search">Search</Link></li>
+        {/* Mobile toggle */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-          {isLoggedIn ? (
-            <>
-              <li className="nav-item">
-                <span className="nav-link" style={{ color: "black", cursor: "pointer" }} onClick={profileSection}>
-                  Welcome, {userName}
-                </span>
-              </li>
-              <li className="nav-item">
-                <button className="nav-link login-btn" onClick={handleLogout}>Logout</button>
-              </li>
-            </>
-          ) : (
-            <>
-              <li className="nav-item">
-                <Link className="nav-link login-btn" to="/app/login">Login</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link register-btn" to="/app/register">Register</Link>
-              </li>
-            </>
-          )}
-        </ul>
+        {/* Navbar links */}
+        <div className="collapse navbar-collapse" id="navbarNav">
+          
+          {/* LEFT SIDE */}
+          <ul className="navbar-nav me-auto">
+
+            <li className="nav-item">
+              <Link className="nav-link" to="/app">
+                Home
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link className="nav-link" to="/app">
+                Gifts
+              </Link>
+            </li>
+
+          </ul>
+
+          {/* RIGHT SIDE */}
+          <ul className="navbar-nav ms-auto">
+            {isLoggedIn ? (
+              <>
+                <li className="nav-item">
+                  <span
+                    className="nav-link"
+                    style={{ cursor: 'pointer' }}
+                    onClick={goToProfile}
+                  >
+                    Welcome, {userName}
+                  </span>
+                </li>
+
+                <li className="nav-item">
+                  <button
+                    className="btn btn-outline-danger ms-2"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/app/login">
+                    Login
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link className="nav-link" to="/app/register">
+                    Register
+                  </Link>
+                </li>
+              </>
+            )}
+          </ul>
+
+        </div>
       </div>
     </nav>
   );
