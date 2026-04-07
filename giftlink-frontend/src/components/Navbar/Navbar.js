@@ -16,7 +16,7 @@ export default function Navbar() {
     } else {
       setIsLoggedIn(false);
     }
-  }, []); 
+  }, []);
 
   const handleLogout = () => {
     sessionStorage.clear();
@@ -32,7 +32,7 @@ export default function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
       <div className="container">
 
-      
+        {/* Brand */}
         <Link className="navbar-brand fw-bold" to="/app">
           GiftLink
         </Link>
@@ -47,18 +47,19 @@ export default function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Navbar links */}
         <div className="collapse navbar-collapse" id="navbarNav">
-          
-          {/* LEFT SIDE */}
+
+         
           <ul className="navbar-nav me-auto">
 
+         
             <li className="nav-item">
-              <Link className="nav-link" to="/app">
+              <a className="nav-link" href="/home.html">
                 Home
-              </Link>
+              </a>
             </li>
 
+            
             <li className="nav-item">
               <Link className="nav-link" to="/app">
                 Gifts

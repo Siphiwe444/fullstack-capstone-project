@@ -6,16 +6,20 @@ function MainPage() {
   const [gifts, setGifts] = useState([]);
   const navigate = useNavigate();
 
+  // ✅ Task 1: Fetch gifts
   useEffect(() => {
     const fetchGifts = async () => {
       try {
         let url = `${urlConfig.backendUrl}/api/gifts`;
-        console.log("Fetching gifts from:", url);
         const response = await fetch(url);
-        if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error: ${response.status}`);
+        }
+
         const data = await response.json();
-        console.log("Fetched gifts:", data);
         setGifts(data);
+
       } catch (error) {
         console.log("Fetch error: " + error.message);
       }
@@ -24,48 +28,72 @@ function MainPage() {
     fetchGifts();
   }, []);
 
+  // ✅ Task 2: Navigate to details page
   const goToDetailsPage = (productId) => {
     navigate(`/app/product/${productId}`);
   };
 
+  // ✅ Task 3: Format timestamp
   const formatDate = (timestamp) => {
     const date = new Date(timestamp * 1000);
-    return date.toLocaleDateString('default', { month: 'long', day: 'numeric', year: 'numeric' });
-  };
-
-  const getConditionClass = (condition) => {
-    return condition === "New" ? "list-group-item-success" : "list-group-item-warning";
+    return date.toLocaleDateString('default', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric'
+    });
   };
 
   return (
     <div className="container mt-5">
+
       {gifts.length === 0 && <p>Loading gifts...</p>}
+
       <div className="row">
         {gifts.map((gift) => (
           <div key={gift.id} className="col-md-4 mb-4">
+
             <div className="card product-card">
+
+             
               <div className="image-placeholder">
-                <img
-                  src={gift.image || 'https://via.placeholder.com/150'}
-                  alt={gift.name}
-                  className="card-img-top"
-                />
+                {gift.image ? (
+                  <img
+                    src={gift.image}
+                    alt={gift.name}
+                    className="card-img-top"
+                  />
+                ) : (
+                  <div className="text-center p-5">
+                    No Image Available
+                  </div>
+                )}
               </div>
 
               <div className="card-body">
+
+               
                 <h5 className="card-title">{gift.name}</h5>
-                <p className="card-text">{formatDate(gift.date_added)}</p>
-                <p className={`card-text ${getConditionClass(gift.condition)}`}>
-                  {gift.condition}
+
+             
+                <p className="card-text">
+                  {formatDate(gift.date_added)}
                 </p>
-                <button onClick={() => goToDetailsPage(gift.id)} className="btn btn-primary">
+
+                <button
+                  onClick={() => goToDetailsPage(gift.id)}
+                  className="btn btn-primary"
+                >
                   View Details
                 </button>
+
               </div>
+
             </div>
+
           </div>
         ))}
       </div>
+
     </div>
   );
 }
