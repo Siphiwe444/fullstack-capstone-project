@@ -1,6 +1,6 @@
 // App.js
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {Routes, Route } from 'react-router-dom';
 
 // Import your pages/components
 import MainPage from './components/MainPage/MainPage';
@@ -11,7 +11,6 @@ import SearchPage from './components/SearchPage/SearchPage'; // <-- Import Searc
 
 function App() {
   return (
-    <Router>
       <Routes>
         <Route path="/app" element={<MainPage />} />
         <Route path="/app/register" element={<RegisterPage />} />
@@ -19,8 +18,7 @@ function App() {
         <Route path="/app/product/:productId" element={<DetailsPage />} />
         <Route path="/app/search" element={<SearchPage />} /> {/* Task: Add SearchPage Route */}
         <Route path="/" element={<MainPage />} />
-      </Routes>
-    </Router>
+    </Routes>
   );
 }
 
