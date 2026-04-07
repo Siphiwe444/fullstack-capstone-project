@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../context/AuthContext';
 
 export default function Navbar() {
@@ -16,7 +16,8 @@ export default function Navbar() {
     } else {
       setIsLoggedIn(false);
     }
-  }, []);
+
+  }, [setIsLoggedIn, setUserName]); 
 
   const handleLogout = () => {
     sessionStorage.clear();
@@ -32,12 +33,10 @@ export default function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
       <div className="container">
 
-        {/* Brand */}
-        <Link className="navbar-brand fw-bold" to="/app">
+        <a className="navbar-brand fw-bold" href="/home.html">
           GiftLink
-        </Link>
+        </a>
 
-        {/* Mobile toggle */}
         <button
           className="navbar-toggler"
           type="button"
@@ -49,44 +48,26 @@ export default function Navbar() {
 
         <div className="collapse navbar-collapse" id="navbarNav">
 
-         
           <ul className="navbar-nav me-auto">
-
-         
             <li className="nav-item">
-              <a className="nav-link" href="/home.html">
-                Home
-              </a>
+              <a className="nav-link" href="/home.html">Home</a>
             </li>
-
-            
             <li className="nav-item">
-              <Link className="nav-link" to="/app">
-                Gifts
-              </Link>
+              <a className="nav-link" href="/app">Gifts</a>
             </li>
-
           </ul>
 
-          {/* RIGHT SIDE */}
           <ul className="navbar-nav ms-auto">
             {isLoggedIn ? (
               <>
                 <li className="nav-item">
-                  <span
-                    className="nav-link"
-                    style={{ cursor: 'pointer' }}
-                    onClick={goToProfile}
-                  >
+                  <span className="nav-link" onClick={goToProfile} style={{ cursor: 'pointer' }}>
                     Welcome, {userName}
                   </span>
                 </li>
 
                 <li className="nav-item">
-                  <button
-                    className="btn btn-outline-danger ms-2"
-                    onClick={handleLogout}
-                  >
+                  <button className="btn btn-outline-danger ms-2" onClick={handleLogout}>
                     Logout
                   </button>
                 </li>
@@ -94,15 +75,10 @@ export default function Navbar() {
             ) : (
               <>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/app/login">
-                    Login
-                  </Link>
+                  <a className="nav-link" href="/app/login">Login</a>
                 </li>
-
                 <li className="nav-item">
-                  <Link className="nav-link" to="/app/register">
-                    Register
-                  </Link>
+                  <a className="nav-link" href="/app/register">Register</a>
                 </li>
               </>
             )}
