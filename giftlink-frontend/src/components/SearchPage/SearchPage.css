@@ -24,7 +24,7 @@
     background-color: #0056b3;
 }
 
-/* Task 3: Customize dropdown filters */
+/* Task 3: Dropdown filters */
 .dropdown-filter {
     margin-bottom: 1rem;
     border: 1px solid #ced4da;
@@ -33,13 +33,13 @@
     font-size: 1rem;
 }
 
-/* Task 4: Style the age range slider */
+/* Task 4: Age range slider */
 .age-range-slider {
     width: 100%;
     margin: 0.5rem 0 1rem 0;
 }
 
-/* Task 5: Enhance search results cards appearance */
+/* Task 5: Search results cards appearance */
 .search-results-card {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     border-radius: 10px;
@@ -51,7 +51,7 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* Task 6: Style the "No products found" alert message */
+/* Task 6: No products alert message */
 .no-products-alert {
     background-color: #f8d7da;
     color: #721c24;
@@ -61,9 +61,7 @@
     border-radius: 0.25rem;
 }
 
-/* Task 7: Hover effect already added above for cards */
-
-/* Task 8: Ensure images in search results are displayed appropriately */
+/* Task 8: Image display */
 .search-results-card img,
 .card-img-top {
     width: 100%;
@@ -71,32 +69,14 @@
     object-fit: cover;
 }
 
-/* Task 9: Responsive layout for smaller screens */
+/* Task 9: Responsive layout */
 @media (max-width: 768px) {
-    .search-input {
-        width: 100%;
-        margin-bottom: 0.5rem;
-    }
-    .search-button {
-        width: 100%;
-        margin-bottom: 1rem;
-    }
-    .search-results-card img {
-        height: 150px;
-    }
+    .search-input { width: 100%; margin-bottom: 0.5rem; }
+    .search-button { width: 100%; margin-bottom: 1rem; }
+    .search-results-card img { height: 150px; }
 }
 
-/* Task 10: Overall page styling for cohesive design */
-.container {
-    padding-bottom: 3rem;
-}
-.filter-section {
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    padding: 1rem;
-    margin-bottom: 2rem;
-}
-h5 {
-    font-weight: bold;
-    color: #333;
-}
+/* Task 10: Overall page styling */
+.container { padding-bottom: 3rem; }
+.filter-section { background-color: #f8f9fa; border-radius: 10px; padding: 1rem; margin-bottom: 2rem; }
+h5 { font-weight: bold; color: #333; }

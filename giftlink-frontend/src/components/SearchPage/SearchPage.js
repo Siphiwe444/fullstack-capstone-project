@@ -1,40 +1,35 @@
+// SearchPage.js
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { urlConfig } from '../../config';
+import './SearchPage.css';
 
 function SearchPage() {
-
-    // Task 1: Define state variables for the search query, age range, and search results.
     const [searchQuery, setSearchQuery] = useState('');
-    const [ageRange, setAgeRange] = useState(6); // default age filter
+    const [ageRange, setAgeRange] = useState(6);
     const [searchResults, setSearchResults] = useState([]);
 
     const categories = ['Living', 'Bedroom', 'Bathroom', 'Kitchen', 'Office'];
     const conditions = ['New', 'Like New', 'Older'];
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         // fetch all products initially
         const fetchProducts = async () => {
             try {
-                let url = `${urlConfig.backendUrl}/api/gifts`;
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`HTTP error: ${response.status}`);
-                }
+                const response = await fetch(`${urlConfig.backendUrl}/api/gifts`);
+                if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
                 const data = await response.json();
                 setSearchResults(data);
             } catch (error) {
-                console.log('Fetch error: ' + error.message);
+                console.error('Fetch error: ' + error.message);
             }
         };
-
         fetchProducts();
     }, []);
 
-    const navigate = useNavigate();
-
-    // Task 2: Fetch search results from the API based on user inputs
     const handleSearch = async () => {
         const baseUrl = `${urlConfig.backendUrl}/api/search?`;
         const queryParams = new URLSearchParams({
@@ -46,9 +41,7 @@ function SearchPage() {
 
         try {
             const response = await fetch(`${baseUrl}${queryParams}`);
-            if (!response.ok) {
-                throw new Error('Search failed');
-            }
+            if (!response.ok) throw new Error('Search failed');
             const data = await response.json();
             setSearchResults(data);
         } catch (error) {
@@ -56,7 +49,6 @@ function SearchPage() {
         }
     };
 
-    // Task 6: Navigate to the details page of a selected gift
     const goToDetailsPage = (productId) => {
         navigate(`/app/product/${productId}`);
     };
@@ -64,34 +56,27 @@ function SearchPage() {
     return (
         <div className="container mt-5">
             <div className="row justify-content-center">
-                <div className="col-md-6">
+                <div className="col-md-8">
                     <div className="filter-section mb-3 p-3 border rounded">
                         <h5>Filters</h5>
                         <div className="d-flex flex-column">
-                            {/* Task 3: Category Dropdown */}
                             <label htmlFor="categorySelect">Category</label>
-                            <select id="categorySelect" className="form-control my-1">
+                            <select id="categorySelect" className="dropdown-filter">
                                 <option value="">All</option>
-                                {categories.map(category => (
-                                    <option key={category} value={category}>{category}</option>
-                                ))}
+                                {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
                             </select>
 
-                            {/* Task 3: Condition Dropdown */}
                             <label htmlFor="conditionSelect">Condition</label>
-                            <select id="conditionSelect" className="form-control my-1">
+                            <select id="conditionSelect" className="dropdown-filter">
                                 <option value="">All</option>
-                                {conditions.map(condition => (
-                                    <option key={condition} value={condition}>{condition}</option>
-                                ))}
+                                {conditions.map(cond => <option key={cond} value={cond}>{cond}</option>)}
                             </select>
 
-                            {/* Task 4: Age Range Slider */}
                             <label htmlFor="ageRange">Less than {ageRange} years</label>
                             <input
                                 type="range"
-                                className="form-control-range"
                                 id="ageRange"
+                                className="age-range-slider"
                                 min="1"
                                 max="10"
                                 value={ageRange}
@@ -99,28 +84,24 @@ function SearchPage() {
                             />
                         </div>
 
-                        {/* Task 7: Text input for search query */}
-                        <div className="mt-3">
+                        <div className="mt-3 d-flex">
                             <input
                                 type="text"
-                                className="form-control"
+                                className="search-input form-control"
                                 placeholder="Search gifts..."
                                 value={searchQuery}
                                 onChange={e => setSearchQuery(e.target.value)}
                             />
+                            <button className="search-button btn" onClick={handleSearch}>
+                                Search
+                            </button>
                         </div>
-
-                        {/* Task 8: Search button */}
-                        <button className="btn btn-primary mt-2" onClick={handleSearch}>
-                            Search
-                        </button>
                     </div>
 
-                    {/* Task 5: Display search results */}
                     <div className="search-results mt-4">
                         {searchResults.length > 0 ? (
                             searchResults.map(product => (
-                                <div key={product.id} className="card mb-3">
+                                <div key={product.id} className="search-results-card card mb-3">
                                     {product.image ? (
                                         <img src={product.image} alt={product.name} className="card-img-top" />
                                     ) : (
@@ -138,13 +119,13 @@ function SearchPage() {
                                 </div>
                             ))
                         ) : (
-                            <div className="alert alert-info" role="alert">
+                            <div className="no-products-alert">
                                 No products found. Please revise your filters.
                             </div>
                         )}
                     </div>
                 </div>
-            </div>
+            </div>s
         </div>
     );
 }

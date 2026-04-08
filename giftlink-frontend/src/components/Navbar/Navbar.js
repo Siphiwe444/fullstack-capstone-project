@@ -1,3 +1,4 @@
+// Navbar.js
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../context/AuthContext';
@@ -59,6 +60,13 @@ export default function Navbar() {
             <li className="nav-item">
               <Link className="nav-link" to="/app">
                 Gifts
+              </Link>
+            </li>
+
+            {/* Added Search link */}
+            <li className="nav-item">
+              <Link className="nav-link" to="/app/search">
+                Search
               </Link>
             </li>
           </ul>

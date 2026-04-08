@@ -3,8 +3,8 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // Import your pages/components
-import MainPage from './components/MainPage/MainPage';
 import Navbar from './components/Navbar/Navbar';
+import MainPage from './components/MainPage/MainPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import LoginPage from './components/LoginPage/LoginPage';
 import DetailsPage from './components/DetailsPage/DetailsPage';
@@ -20,7 +20,7 @@ function App() {
         <Route path="/app/register" element={<RegisterPage />} />
         <Route path="/app/login" element={<LoginPage />} />
         <Route path="/app/product/:productId" element={<DetailsPage />} />
-        <Route path="/app/search" element={<SearchPage />} />
+        <Route path="/app/search" element={<SearchPage />} /> {/* Search route */}
         <Route path="/" element={<MainPage />} />
       </Routes>
     </>
